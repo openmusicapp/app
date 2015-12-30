@@ -1,0 +1,17 @@
+.playlistView .playlist{
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+	margin-bottom: 10px;
+    padding: 5px;
+}
+.playlistView .playlist img{
+    height: 300px;
+    width: 300px;
+}
+.playlistView .playlist span {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    width: 300px;
+}

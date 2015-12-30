@@ -1,0 +1,84 @@
+.no-bg .x-slider-horz:before, .no-bg .x-slider-horz .x-slider-end, .no-bg .x-slider-horz .x-slider-inner {
+    background-image: none !important; /* remove bg from slider */
+    background-color: transparent !important; /* remove bg from slider */
+	border: 0 !important;
+}
+
+#player {
+	background-color: #070B17;
+	margin: 0;
+	padding: 0;
+	.cover {
+		top: 0 !important;
+		.thumb {
+			width: 100px;
+			float: left;
+		}
+		.songtitle {
+			color: #FFF;
+			text-align: left;
+			font-size: 14px;
+			font-weight: bold;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			width: 200px;
+			padding: 5px;
+		}
+		.artistname {
+			color: #999;
+			text-align: left;
+			font-size: 12px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			width: 200px;
+			padding: 0 5px;
+		}
+	}
+	.play {
+		border: 2px solid #FFF;
+		padding: 10px;
+		border-radius: 50%;
+	}
+	.x-btn-icon-el {
+		color: #FFF;
+	}
+	.x-btn-pressed {
+		.x-btn-icon-el {
+			color: #5FA2DD;
+		}
+	}
+}
+
+#progressBar {
+	.x-progress-default {
+		background-color: transparent!important;
+		height: 5px !important;
+		.x-progress-bar-default {
+			background-color: $base-color !important;
+		}
+		.x-progress-text {
+			display:none;
+		}
+	}
+	.x-slider-thumb {
+		z-index: 99999 !important;
+	}
+}
+
+.relatedSongs {
+	background-color: $base-color;
+	.related {
+		margin: 10px 0;
+		padding: 10px;
+		background-color: lighten($base-color, 2)
+		.songtitle {
+			font-size: 14px;
+			font-weight: bold;
+		}
+		.artistname {
+			color: #FFF;
+		}
+	}
+}

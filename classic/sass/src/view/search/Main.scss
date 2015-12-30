@@ -1,0 +1,16 @@
+.artistsView .thumb-wrap{
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+}
+.artistsView .thumb-wrap img{
+    height: 150px;
+    width: 125px;
+}
+.artistsView .thumb-wrap span {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    width: 125px;
+}
