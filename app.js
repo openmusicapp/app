@@ -3,6 +3,8 @@
  * needed for your application, but these edits will have to be merged by
  * Sencha Cmd when upgrading.
  */
+var lock = null;
+var userProfile = {};
 Ext.application({
 	name: 'OpenMusic',
 

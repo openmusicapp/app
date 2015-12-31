@@ -19,7 +19,7 @@
     $ui-tab-border-radius: 0,
     $ui-tab-border-width: 0,
     $ui-tab-inner-border-width: 0,
-    $ui-tab-padding: 24px,
+    $ui-tab-padding: 12px,
     $ui-tab-margin: 0,
     $ui-tab-font-size: 15px,
     $ui-tab-font-size-over: 15px,
@@ -84,4 +84,14 @@
 .x-panel-header-title-navigation > .x-title-text-navigation:after {
     top: 30px;
     right: -24px;
+}
+
+.profileBtn {
+	.x-btn-icon-el {
+		background-size: 32px;
+		border-radius: 50%;
+		border: 3px solid $base-color;
+		width: 36px;
+		height: 36px;
+	}
 }

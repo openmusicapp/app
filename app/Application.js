@@ -17,28 +17,55 @@ Ext.define('OpenMusic.Application', {
 	],
 
 	launch: function () {
-		// TODO - Launch the application
-		Ext.create('Ext.window.Window', {
-			 title: 'Video'
-			,id: 'videoPreview'
-			,closable: false
-			,draggable: false
-			,resizable: false
-			,autoShow: true
-			,width: 560
-			,height: 360
-			,x: 0
-			,y: document.body.clientHeight
-			,html: '<div id="playerframe"></div>'
-			,listeners: {
-				hide: function(win) {
-					OpenMusic.util.Player.player.setSize(1, 1);
-					OpenMusic.util.Player.player.setPlaybackQuality('small');
-					win.setY(document.body.clientHeight);
+		if ( Ext.isEmpty(localStorage.getItem('userToken')) ) {
+			Ext.first('viewport').add({ xtype: 'login' });
+			lock = new Auth0Lock('NEFDmDFm9rH7vln9ahIZKQbpdMYjiuzk', 'openmusic.auth0.com');
+			lock.show(function(err, profile, token) {
+				if (err) {
+					// Error callback
+					console.error(err, profile, token);
+					alert('There was an error');
+				} else {
+					// Success callback
+
+					// Save the JWT token.
+					localStorage.setItem('userToken', token);
+					localStorage.setItem('userProfile', Ext.encode(profile));
+					
+					console.info('User Profile', profile);
+					
+					// Save the profile
+					userProfile = profile;
+					
+					Ext.first('login').destroy();
+					OpenMusic.app.launch();
 				}
-			}
-		});
-		OpenMusic.util.Player.launch();
+			});
+		} else {
+			userProfile = Ext.decode(localStorage.getItem('userProfile'));
+			Ext.first('viewport').add({ xtype: 'app-main' });
+			Ext.create('Ext.window.Window', {
+				 title: 'Video'
+				,id: 'videoPreview'
+				,closable: false
+				,draggable: false
+				,resizable: false
+				,autoShow: true
+				,width: 560
+				,height: 360
+				,x: 0
+				,y: document.body.clientHeight
+				,html: '<div id="playerframe"></div>'
+				,listeners: {
+					hide: function(win) {
+						OpenMusic.util.Player.player.setSize(1, 1);
+						OpenMusic.util.Player.player.setPlaybackQuality('small');
+						win.setY(document.body.clientHeight);
+					}
+				}
+			});
+			OpenMusic.util.Player.launch();
+		}
 	},
 
 	onAppUpdate: function () {
