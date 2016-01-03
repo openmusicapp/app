@@ -1,6 +1,10 @@
 Ext.define('OpenMusic.util.Player', {
 	 singleton: true
 	
+	,requires: [
+		'Ext.Promise'
+	]
+	
 	,player: null
 	,currentSong: null
 	
@@ -75,29 +79,23 @@ Ext.define('OpenMusic.util.Player', {
 			 videoId: videoId
 			,suggestedQuality: 'small'
 		});
-		
 	}
 	
-	,getRandomSong: function() {
+	,createPlaylistFromStore: function(autoPlay) {
 		var me = this;
 		
-		var song = Ext.first('queue').getStore().findRecord('played', false, Ext.Number.randomInt(0, Ext.first('queue').getStore().getCount()-1));
-		
-		if ( song.get('played') ) me.getRandomSong();
-		return song;
-	}
-	
-	,playAll: function() {
-		var me = this;
-		
-		if ( me.shuffle ) {
-			var song = me.getRandomSong();
-			me.playSongByRecord(song);
-		} else {
-			var indexCurrSong = Ext.first('queue').getStore().indexOf(me.currentSong);
-			var song = Ext.first('queue').getStore().getAt(indexCurrSong+1);
-			if ( song ) me.playSongByRecord(song);
-		}
+		var listSongs = [];
+		Ext.first('queue').getStore().each(function(song, index, total) {
+			
+			me.searchVideo(song, index).then(function (content) {
+				listSongs.push(content.id.videoId);
+				if ( index + 1 === total ) {
+					console.log('entro', listSongs);
+					me.player.cuePlaylist(listSongs);
+					if ( autoPlay ) me.player.playVideo();
+				}
+			});
+		});
 	}
 	
 	,playSongByRecord: function(song) {
@@ -137,20 +135,23 @@ Ext.define('OpenMusic.util.Player', {
 	,nextSong: function() {
 		var me = this;
 		
-		//me.player.nextVideo();
-		me.playAll();
+		me.player.nextVideo();
 	}
 	
 	,shufflePlay: function(pressed) {
 		var me = this;
 		
 		me.shuffle = pressed;
+		me.player.setShuffle(pressed);
+		localStorage.setItem('userConfig-shuffle', pressed);
 	}
 	
 	,repeatPlay: function(pressed) {
 		var me = this;
 		
 		me.repeat = pressed;
+		me.player.setLoop(pressed);
+		localStorage.setItem('userConfig-repeat', pressed);
 	}
 	
 	,loadPlaylist: function(playlistId) {
@@ -198,5 +199,35 @@ Ext.define('OpenMusic.util.Player', {
 			,artist: artist
 		});
 		Ext.getCmp('player').down('#relatedSongs').getStore().load();
+	}
+	
+	,searchVideo: function( song, index ) {
+		var me = this;
+		
+		console.log('searchVideo', song);
+		
+		return new Ext.Promise(function (resolve, reject) {
+			// Use the JavaScript client library to create a search.list() API call.
+			var request = gapi.client.youtube.search.list({
+				 part: 'snippet'
+				,regionCode: 'US'
+				,type: 'video'
+				,videoCategoryId: 10 // Music
+				,maxResults: 1
+				,order: 'rating'
+				,videoSyndicated: true
+				,q: song.get('artist_name') + ' ' + song.get('title')
+			});
+
+			// Send the request to the API server,
+			// and invoke onSearchRepsonse() with the response.
+			request.execute(onSearchResponse);
+
+			// Called automatically with the response of the YouTube API request.
+			function onSearchResponse(response) {
+				//me.player.loadPlaylist(response.result.items[0].id.videoId);
+				resolve(response.result.items[0]);
+			}
+		});
 	}
 });

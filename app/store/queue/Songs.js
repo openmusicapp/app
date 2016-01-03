@@ -13,10 +13,6 @@ Ext.define('OpenMusic.store.queue.Songs', {
 			,type: 'string'
 			,defaultValue: 'queued'
 		}
-		,{
-			 name: 'order'
-			,type: 'int'
-		}
 	]
 	,autoLoad: true
 	,proxy: {

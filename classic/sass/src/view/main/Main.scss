@@ -86,12 +86,15 @@
     right: -24px;
 }
 
-.profileBtn {
-	.x-btn-icon-el {
-		background-size: 32px;
-		border-radius: 50%;
-		border: 3px solid $base-color;
-		width: 36px;
-		height: 36px;
+.topToolbar {
+	background-color: $base-color;
+	.profileBtn {
+		.x-btn-icon-el {
+			background-size: 32px;
+			border-radius: 50%;
+			border: 3px solid #404040;
+			width: 36px;
+			height: 36px;
+		}
 	}
 }

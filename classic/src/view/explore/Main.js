@@ -22,7 +22,7 @@ Ext.define('OpenMusic.view.explore.Main',{
 			xtype: 'exploreGM'
 		}
 		,{
-			TITLE: 'DESCUBRIR'
+			title: 'DESCUBRIR'
 		}
 	]
 });

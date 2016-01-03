@@ -15,7 +15,7 @@ Ext.define('OpenMusic.view.explore.gm.MainController', {
 		me.getView().down('grid').getStore().getProxy().setExtraParams({
 			 api_key: '4B83VBZ1TZJHCZJLG'
 			,format: 'json'
-			,results: 100
+			,results: 5
 			,type: 'genre-radio'
 			,genre: record.get('value')
 		});
@@ -57,6 +57,6 @@ Ext.define('OpenMusic.view.explore.gm.MainController', {
 		
 		Ext.first('queue').getStore().add(songs);
 		//OpenMusic.util.Player.playAll = true;
-		OpenMusic.util.Player.playAll();
+		OpenMusic.util.Player.createPlaylistFromStore(true);
 	}
 });

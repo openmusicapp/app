@@ -115,6 +115,7 @@ Ext.define('OpenMusic.view.player.Main',{
 		,{
 			 iconCls: 'fa fa-random'
 			,enableToggle: true
+			,pressed: localStorage.getItem('userConfig-shuffle') === null ? false : localStorage.getItem('userConfig-shuffle')
 			,baseCls: ''
 			,margin: '0 30'
 			,listeners: {
@@ -157,6 +158,7 @@ Ext.define('OpenMusic.view.player.Main',{
 			,baseCls: ''
 			,margin: '0 30'
 			,enableToggle: true
+			,pressed: localStorage.getItem('userConfig-repeat') === null ? false : localStorage.getItem('userConfig-repeat')
 			,listeners: {
 				toggle: 'onRepeat'
 			}

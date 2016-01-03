@@ -115,9 +115,10 @@ Ext.define('OpenMusic.view.main.Main', {
 				}
 			},
 			dockedItems: [
-				,{
+				{
 					 dock: 'top'
 					,xtype: 'toolbar'
+					,cls: 'topToolbar'
 					,items: [
 						{
 							 xtype: 'textfield'
