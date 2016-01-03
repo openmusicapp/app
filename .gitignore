@@ -44,3 +44,6 @@ Thumbs.db
 ######################
 build/
 resources/sass/default/.sass-cache/
+modern.json
+classic.json
+bootstrap.json
