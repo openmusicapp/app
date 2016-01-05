@@ -15,7 +15,7 @@ Ext.define('OpenMusic.view.explore.gm.MainController', {
 		me.getView().down('grid').getStore().getProxy().setExtraParams({
 			 api_key: '4B83VBZ1TZJHCZJLG'
 			,format: 'json'
-			,results: 5
+			,results: 50
 			,type: 'genre-radio'
 			,genre: record.get('value')
 		});

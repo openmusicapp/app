@@ -9,8 +9,8 @@ Ext.define('OpenMusic.util.Player', {
 	,currentSong: null
 	
 	,playAll: false
-	,shuffle: false
-	,repeat: false
+	,shuffle: Boolean(localStorage.getItem('userConfig-shuffle') === null ? false : localStorage.getItem('userConfig-shuffle'))
+	,repeat: Boolean(localStorage.getItem('userConfig-repeat') === null ? false : localStorage.getItem('userConfig-repeat'))
 	
 	,launch: function() {
 		var me = this;
@@ -65,6 +65,9 @@ Ext.define('OpenMusic.util.Player', {
 				//me.getRelatedSongs(Ext.String.trim(me.player.getVideoData().title.split('-')[0]));
 			} else if ( event.data === 0 && me.playAll ) {
 				me.playAll();
+			} else if ( event.data === -1 ) {
+				me.player.setShuffle(me.shuffle);
+				me.player.setLoop(me.repeat);
 			} else {
 				Ext.getCmp('player').down('#playPause').setPressed(false);
 				clearInterval(interval);
@@ -85,17 +88,27 @@ Ext.define('OpenMusic.util.Player', {
 		var me = this;
 		
 		var listSongs = [];
+		var delay = 0;
 		Ext.first('queue').getStore().each(function(song, index, total) {
-			
-			me.searchVideo(song, index).then(function (content) {
-				listSongs.push(content.id.videoId);
-				if ( index + 1 === total ) {
-					console.log('entro', listSongs);
-					me.player.cuePlaylist(listSongs);
-					if ( autoPlay ) me.player.playVideo();
-				}
-			});
+			setTimeout(function() {
+				me.searchVideo(song, index).then(function (content) {
+					listSongs.push(content.id.videoId);
+				});
+			}, delay);
+			delay = delay + 1000;
 		});
+		
+		var check = setInterval(function() {
+			if ( listSongs.length === Ext.first('queue').getStore().getCount() ) {
+				console.log('entro', listSongs, autoPlay);
+				me.player.loadPlaylist({
+					 playlist: listSongs
+					,listType: 'playlist'
+					,suggestedQuality: 'small'
+				});
+				clearInterval(check);
+			}
+		}, 1000);
 	}
 	
 	,playSongByRecord: function(song) {
@@ -214,7 +227,7 @@ Ext.define('OpenMusic.util.Player', {
 				,type: 'video'
 				,videoCategoryId: 10 // Music
 				,maxResults: 1
-				,order: 'rating'
+				,order: 'viewCount'
 				,videoSyndicated: true
 				,q: song.get('artist_name') + ' ' + song.get('title')
 			});

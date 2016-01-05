@@ -16,13 +16,13 @@ Ext.define('OpenMusic.store.explore.Charts', {
 	}
 	
 	,data: [{
-		 playlistId: 'PLgzTt0k8mXzEk586ze4BjvDXR7c-TUSnx'
+		 playlistId: 'PLYbjH_BWVdHS0pDdHhg19hZLDLSX9LZaz'
 		,title: 'El Top 50 Global'
 		,description: ''
 		,thumb: 'resources/charts/7c41f9cb323018476fbcb769b80cbbfd60cce078.jpg'
 		,channelTitle: ''
 	},{
-		 playlistId: 'PL8ry0ccaH1k9lIs8OBLluiiHvhi-hc1RM'
+		 playlistId: 'PLYbjH_BWVdHQ5EICWP7KGMNVPEQrzj7oe'
 		,title: 'El Top 50 de Argentina'
 		,description: ''
 		,thumb: 'resources/charts/9476ab5a939577fbb11d1ef3524f3471a40e2e08.jpg'

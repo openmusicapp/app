@@ -95,7 +95,8 @@ Ext.define('OpenMusic.view.explore.charts.MainController', {
 					,artist_name: song.snippet.title.split('-')[0]
 				});
 			});
-
+			
+			Ext.getCmp('queue').getStore().removeAll();
 			Ext.getCmp('queue').getStore().add(songs);
 		}
 	}

@@ -21,6 +21,7 @@ Ext.define('OpenMusic.view.queue.MainController', {
 			,regionCode: 'US'
 			,type: 'video'
 			,videoCategoryId: 10 // Music
+			,order: 'viewCount'
 			,q: record.get('artist_name') + ' ' + record.get('title')
 		});
 
