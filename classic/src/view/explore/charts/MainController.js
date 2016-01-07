@@ -46,20 +46,24 @@ Ext.define('OpenMusic.view.explore.charts.MainController', {
 	
 	,onItemClick: function( view, record, item, index, e ) {
 		var me = this;
-		/*
-		console.log(record.get('data'));
 		
 		switch ( record.get('source') ) {
 			case 'youtube':
-				OpenMusic.util.Player.loadPlaylist(record.get('data').id);
-				me.queueSongsFromPlaylist(record.get('data').id);
+				me.queueSongsFromPlaylist(record.get('playlistId'));
+				Ext.defer(function() {
+					OpenMusic.util.Player.loadPlaylist(record.get('playlistId'));
+				}, 1000);
 				break;
+			case 'echonest':
+				Ext.first('info').down('#playlistSongs').getStore().getProxy().setExtraParams(Ext.Object.mergeIf({
+					 api_key: '4B83VBZ1TZJHCZJLG'
+					,format: 'json'
+				}, record.get('echoData')));
+				Ext.first('info').down('#playlistSongs').getStore().load();
+				Ext.first('info').floatCollapsedPanel();
 			default:
 				break;
 		}
-		*/
-		OpenMusic.util.Player.loadPlaylist(record.get('playlistId'));
-		me.queueSongsFromPlaylist(record.get('playlistId'));
 	}
 	
 	,onItemContextMenu: function( view, record, item, index, e ) {
@@ -67,8 +71,6 @@ Ext.define('OpenMusic.view.explore.charts.MainController', {
 		
 		// Prevent showing native contextmenu
 		e.preventDefault();
-		
-		alert('onItemContextMenu');
 	}
 	
 	,queueSongsFromPlaylist: function(playlistId) {
@@ -93,6 +95,7 @@ Ext.define('OpenMusic.view.explore.charts.MainController', {
 				songs.push({
 					 title: song.snippet.title.split('-')[1]
 					,artist_name: song.snippet.title.split('-')[0]
+					,ytvideo_id: song.snippet.resourceId.videoId
 				});
 			});
 			

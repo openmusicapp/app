@@ -8,6 +8,7 @@ Ext.define('OpenMusic.store.queue.Songs', {
 		,'title'
 		,'artist_id'
 		,'artist_name'
+		,'ytvideo_id'
 		,{
 			 name: 'status'
 			,type: 'string'

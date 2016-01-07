@@ -21,7 +21,7 @@ Ext.define('OpenMusic.view.queue.MainController', {
 			,regionCode: 'US'
 			,type: 'video'
 			,videoCategoryId: 10 // Music
-			,order: 'viewCount'
+			//,order: 'viewCount'
 			,q: record.get('artist_name') + ' ' + record.get('title')
 		});
 
@@ -31,7 +31,15 @@ Ext.define('OpenMusic.view.queue.MainController', {
 
 		// Called automatically with the response of the YouTube API request.
 		function onSearchResponse(response) {
-			OpenMusic.util.Player.loadSong(response.result.items[0].id.videoId);
+			Ext.each(response.result.items, function(video) {
+				var findChannelTitle = video.snippet.channelTitle;
+				var isVevo = findChannelTitle.match(/VEVO/g); //checks to see if this is VEVO content. We only wan't to use Vevo videos. 
+				if (isVevo){ //returns true if VEVO is found in the channel title
+					OpenMusic.util.Player.loadSong(video.id.videoId);
+				} else {
+					return false;
+				}
+			});
 		}
 	}
 });

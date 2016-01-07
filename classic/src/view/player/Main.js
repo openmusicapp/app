@@ -42,6 +42,16 @@ Ext.define('OpenMusic.view.player.Main',{
 			}
 		}
 		,{
+			 iconCls: 'fa fa-thumbs-up'
+			,baseCls: ''
+			,margin: '0 10'
+		}
+		,{
+			 iconCls: 'fa fa-thumbs-down'
+			,baseCls: ''
+			,margin: '0 10'
+		}
+		,{
 			 iconCls: 'fa fa-heart'
 			,baseCls: ''
 			,margin: '0 10'

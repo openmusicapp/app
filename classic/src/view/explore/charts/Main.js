@@ -18,7 +18,7 @@ Ext.define('OpenMusic.view.explore.charts.Main',{
 	,tpl: [
 		'<tpl for=".">',
 			'<div class="playlist">',
-			  '<img src="{thumb}" />',
+			  '<img src="{picture}" />',
 			  '<br/><span>{title}</span>',
 			'</div>',
 		'</tpl>'

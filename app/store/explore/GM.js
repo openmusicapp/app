@@ -7,6 +7,11 @@ Ext.define('OpenMusic.store.explore.GM', {
 		 'title'
 		,'picture'
 		,'value'
+		,{
+			 name: 'source'
+			,type: 'string'
+			,defaultValue: 'echonest'
+		}
 		,'ytchannel'
 	]
 	
@@ -103,8 +108,8 @@ Ext.define('OpenMusic.store.explore.GM', {
 		}
 		,{
 			 title: 'Country'
-			,picture: 'holidays2015'
-			,value: 'holidays'
+			,picture: 'country'
+			,value: 'country'
 		}
 		,{
 			 title: 'Religioso (falta)'

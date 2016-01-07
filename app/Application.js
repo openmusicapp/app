@@ -44,6 +44,7 @@ Ext.define('OpenMusic.Application', {
 		} else {
 			userProfile = Ext.decode(localStorage.getItem('userProfile'));
 			Ext.first('viewport').add({ xtype: 'app-main' });
+			//Ext.first('viewport').add({ xtype: 'taste' });
 			Ext.create('Ext.window.Window', {
 				 title: 'Video'
 				,id: 'videoPreview'

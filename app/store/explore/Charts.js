@@ -2,19 +2,44 @@ Ext.define('OpenMusic.store.explore.Charts', {
 	 extend: 'Ext.data.Store'
 
 	,alias: 'store.explore-charts'
+	
 	,fields: [
-		 'id'
-		,'playlistId'
-		,'title'
-		,'description'
-		,'thumb'
-		,'channelTitle'
+		 'title'
+		,'picture'
+		,{
+			 name: 'source'
+			,type: 'string'
+			,defaultValue: 'echonest'
+		}
+		,'echoData'
+		,'youtubeData'
 	]
 	,autoLoad: true
 	,proxy: {
 		 type: 'memory'
 	}
 	
+	,data: [{
+		 title: 'El Top 50 Global - Pop'
+		,picture: 'resources/charts/7c41f9cb323018476fbcb769b80cbbfd60cce078.jpg'
+		,source: 'echonest'
+		,echoData: {
+			 type: 'genre-radio'
+			,genre: 'pop'
+			,song_selection: 'song_hotttnesss-top'
+			,sort: 'artist_hotttnesss-desc'
+			,results: 50
+		}
+	},{
+		 title: 'El Top 50 de Argentina'
+		,picture: 'resources/charts/9476ab5a939577fbb11d1ef3524f3471a40e2e08.jpg'
+		,source: 'echonest'
+		,echoData: {
+			 type: 'genre-radio'
+			,genre: 'discovery'
+		}
+	}]
+	/*
 	,data: [{
 		 playlistId: 'PLYbjH_BWVdHS0pDdHhg19hZLDLSX9LZaz'
 		,title: 'El Top 50 Global'
@@ -40,6 +65,7 @@ Ext.define('OpenMusic.store.explore.Charts', {
 		,thumb: 'resources/charts/c90916ccfaf7f7d9e19c19425dcb8bf6fd23f9a1.jpg'
 		,channelTitle: ''
 	}]
+	*/
 	/*
 	,fields: [
 		 'title'

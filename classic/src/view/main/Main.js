@@ -8,7 +8,7 @@
 Ext.define('OpenMusic.view.main.Main', {
 	 extend: 'Ext.panel.Panel'
 	,xtype: 'app-main'
-
+	
 	,requires: [
 		 'Ext.window.MessageBox'
 		,'Ext.tab.Panel'
@@ -22,17 +22,18 @@ Ext.define('OpenMusic.view.main.Main', {
 		,'OpenMusic.view.info.Main'
 	]
 	
+	,controller: 'main-main'
+	,viewModel: {
+		type: 'main-main'
+	}
+	
 	,layout: 'border'
 	,items: [
 		{
-			 region: 'center',
+			region: 'center',
 			xtype: 'tabpanel',
-			controller: 'main',
-			viewModel: 'main',
-
 			ui: 'navigation',
 			plugins: 'responsive',
-
 			title: 'Open Music',
 			tabBarHeaderPosition: 1,
 			titleRotation: 0,
@@ -132,6 +133,9 @@ Ext.define('OpenMusic.view.main.Main', {
 										field.reset();
 									}
 								}
+							}
+							,listeners: {
+								specialkey: 'doSearch'
 							}
 						}
 						,'->'

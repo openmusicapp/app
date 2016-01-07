@@ -36,6 +36,17 @@ Ext.define('OpenMusic.view.queue.Main', {
 	,emptyText: 'No songs queued...'
 	,columns: [
 		 {
+			 dataIndex: 'status'
+			,width: 30
+			,sortable: false
+			,menuDisabled: true
+			,draggable: false
+			,renderer: function( value, metaData, record, rowIndex, colIndex, store, view ) {
+				if ( value === 'playing' ) return '<img src="resources/playing.gif" alt="Playing" />';
+				return '';
+			}
+		 }
+		,{
 			 text: 'CANCIÓN'
 			,dataIndex: 'title'
 			,flex: 1

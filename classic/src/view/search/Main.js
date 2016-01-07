@@ -19,23 +19,6 @@ Ext.define('OpenMusic.view.search.Main', {
 	
 	,items: [
 		{
-			 xtype: 'textfield'
-			,emptyText: 'Buscar...'
-			,dock: 'top'
-			,width: 200
-			,triggers: {
-				clear: {
-					 cls: 'x-form-clear-trigger'
-					,handler: function(field) {
-						field.reset();
-					}
-				}
-			}
-			,listeners: {
-				specialkey: 'doSearch'
-			}
-		}
-		,{
 			 xtype: 'panel'
 			,title: 'Artistas'
 			,hidden: true
